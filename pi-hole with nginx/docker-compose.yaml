@@ -1,0 +1,59 @@
+version: "3"
+services:
+
+  nginx-dns:
+    container_name: nginx-dns
+    image: nginx:latest
+    depends_on:
+      - dns1
+      - dns2
+    ports:
+      - "53:53/udp"
+    environment:
+      TZ: 'Europe/Amsterdam'
+    volumes:
+      - './nginx-dns/nginx.conf:/etc/nginx/nginx.conf'
+      - './nginx-dns/logs/:/var/log/nginx/'
+    restart: unless-stopped
+    networks:
+      - dns-network
+
+  dns1:
+    container_name: dns1
+    image: pihole/pihole:latest
+    ports:
+      - "8181:80/tcp"
+    environment:
+      TZ: 'Europe/Amsterdam'
+      WEBPASSWORD: 'pihole'
+    volumes:
+      - './dns1/etc-pihole/:/etc/pihole/'
+      - './dns1/etc-dnsmasq.d/:/etc/dnsmasq.d/'
+    dns:
+      - 8.8.8.8
+      - 208.67.220.220
+    restart: unless-stopped
+    networks:
+      - dns-network
+
+  dns2:
+    container_name: dns2
+    image: pihole/pihole:latest
+    ports:
+      - "8182:80/tcp"
+    environment:
+      TZ: 'Europe/Amsterdam'
+      WEBPASSWORD: 'pihole'
+    volumes:
+      - './dns2/etc-pihole/:/etc/pihole/'
+      - './dns2/etc-dnsmasq.d/:/etc/dnsmasq.d/'
+    dns:
+      - 8.8.8.8
+      - 208.67.220.220
+    restart: unless-stopped
+    networks:
+      - dns-network
+
+networks:
+  dns-network:
+    driver: bridge
