@@ -4,4 +4,8 @@ Each message is sent to a MQTT topic.
 There the data is transformed and send to Domoticz and InfluxDB, based on a flow created in node-red
 
 
-```*/2 * * * * /home/pi/xiaomi/xiaomi-ble-mqtt/data-read.py >/dev/null 2>&1```
+```
+sudo pip3 install bluepy
+sudo pip3 install paho-mqtt
+
+*/2 * * * * /home/pi/xiaomi/xiaomi-ble-mqtt/data-read.py >/dev/null 2>&1```
