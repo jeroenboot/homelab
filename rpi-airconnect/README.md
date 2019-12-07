@@ -9,4 +9,8 @@ Simply run:
 ```bash
 docker build -t docker-airconnect-rpi .
 docker run -d --net=host --name=airconnect --restart=unless-stopped docker-airconnect-rpi
+
+or
+
+docker run -d --net=host --name=airconnect --restart=unless-stopped jeroenboot/rpi-airconnect
 ```
