@@ -5,9 +5,12 @@ There the data is transformed and send to Domoticz and InfluxDB, based on a flow
 
 
 ```
-sudo apt-get install -y python3-pip
+sudo apt-get update && sudo apt-get upgrade -y
+sudo rpi-update
+#
+sudo apt-get install -y python3-pip git
 sudo pip3 install bluepy
 sudo pip3 install paho-mqtt
 sudo pip3 install btlewrap
 
-*/2 * * * * /home/pi/xiaomi/xiaomi-ble-mqtt/data-read.py >/dev/null 2>&1```
+*/2 * * * * python3 /home/pi/homelab/xiaomi/data-read.py >/dev/null 2>&1```
