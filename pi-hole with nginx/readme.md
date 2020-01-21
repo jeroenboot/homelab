@@ -12,3 +12,12 @@ Each pihole exposes the admin-gui to make adjustments
 7d4352576f1f        pihole/pihole:latest           "/s6-init"               2 months ago        Up 39 hours (healthy)   53/udp, 53/tcp, 443/tcp, 67/udp, 0.0.0.0:8181->80/tcp                    dns1
 1a0b18f90b55        pihole/pihole:latest           "/s6-init"               2 months ago        Up 28 hours (healthy)   53/udp, 53/tcp, 443/tcp, 67/udp, 0.0.0.0:8182->80/tcp                    dns2
 ```
+
+### Dynamic switcher
+Create multiple files (loose and strict) reflecting two policies
+add a "switcher" in the crontab
+
+```
+20 * * * * cp /home/pi/docker/dns-stack/nginx-dns/nginx.conf.loose /home/pi/docker/dns-stack/nginx-dns/nginx.conf && docker restart nginx-dns >/dev/null 2>&1
+7 * * * * cp /home/pi/docker/dns-stack/nginx-dns/nginx.conf.strict /home/pi/docker/dns-stack/nginx-dns/nginx.conf && docker restart nginx-dns >/dev/null 2>&1
+```
