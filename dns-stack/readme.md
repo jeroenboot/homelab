@@ -18,6 +18,6 @@ Create multiple files (loose and strict) reflecting two policies
 add a "switcher" in the crontab
 
 ```
-20 * * * * cp /home/pi/docker/dns-stack/nginx-dns/nginx.conf.loose /home/pi/docker/dns-stack/nginx-dns/nginx.conf && docker restart nginx-dns >/dev/null 2>&1
-7 * * * * cp /home/pi/docker/dns-stack/nginx-dns/nginx.conf.strict /home/pi/docker/dns-stack/nginx-dns/nginx.conf && docker restart nginx-dns >/dev/null 2>&1
+* 20 * * * cp /home/pi/docker/dns-stack/nginx-dns/nginx.conf.loose /home/pi/docker/dns-stack/nginx-dns/nginx.conf && docker restart nginx-dns >/dev/null 2>&1
+* 7 * * * cp /home/pi/docker/dns-stack/nginx-dns/nginx.conf.strict /home/pi/docker/dns-stack/nginx-dns/nginx.conf && docker restart nginx-dns >/dev/null 2>&1
 ```
